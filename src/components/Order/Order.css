@@ -1,0 +1,17 @@
+.Order {
+  width: 80%;
+  border: 1px solid #eee;
+  box-shadow: rgba(17, 133, 223, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  padding: 10px;
+  margin: 10px auto;
+  box-sizing: border-box;
+  background-image: linear-gradient(
+    to left,
+    #6abf34,
+    #86c32d,
+    #9fc629,
+    #b7c927,
+    #cecb2a
+  );
+}

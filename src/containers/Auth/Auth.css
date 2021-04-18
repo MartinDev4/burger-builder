@@ -1,0 +1,24 @@
+.Auth {
+  margin: 20px auto;
+  width: 80%;
+  text-align: center;
+  /* box-shadow: 0 2px 3px #ccc; */
+  border: 1px solid #eee;
+  padding: 10px;
+  box-sizing: border-box;
+  background-image: linear-gradient(
+    to right bottom,
+    #1659ad,
+    #475fb6,
+    #6866be,
+    #846cc5,
+    #9e72cb
+  );
+  box-shadow: rgba(60, 157, 236, 0.35) 0px 5px 15px;
+}
+
+@media (min-width: 600px) {
+  .Auth {
+    width: 500px;
+  }
+}
