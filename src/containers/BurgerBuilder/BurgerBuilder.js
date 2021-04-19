@@ -19,7 +19,6 @@ const burgerBuilder = (props) => {
   const price = useSelector((state) => state.burgerBuilder.totalPrice);
   const error = useSelector((state) => state.burgerBuilder.error);
   const isAuthenticated = useSelector((state) => state.auth.token !== null);
-  console.log(price);
   const onIngredientAdded = (ingName) =>
     dispatch(actions.addIngredient(ingName));
   const onIngredientRemoved = (ingName) =>

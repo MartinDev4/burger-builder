@@ -5,6 +5,7 @@ import { Redirect } from "react-router-dom";
 import Input from "../../components/UI/Input/Input";
 import Button from "../../components/UI/Button/Button";
 import Spinner from "../../components/UI/Spinner/Spinner";
+import Modal from "../../components/UI/Modal/Modal";
 import classes from "./Auth.css";
 import * as actions from "../../store/actions/index";
 import { updateObject, checkValidity } from "../../shared/utility";
@@ -41,6 +42,7 @@ const auth = (props) => {
     },
   });
   const [isSignup, setIsSignup] = useState(true);
+  const [showModal, setShowModal] = useState(false);
 
   const { buildingBurger, authRedirectPath, onSetAuthRedirectPath } = props;
 
@@ -98,6 +100,13 @@ const auth = (props) => {
     form = <Spinner />;
   }
 
+  useEffect(() => {
+    if (props.error) {
+      setShowModal(true);
+    }
+    return () => {};
+  }, [props.error]);
+
   let errorMessage = null;
 
   if (props.error) {
@@ -113,6 +122,28 @@ const auth = (props) => {
     <div className={classes.Auth}>
       {authRedirect}
       {errorMessage}
+      <Modal show={showModal} modalClosed={() => setShowModal(false)}>
+        <h4>Email already exists!</h4>
+        <h4>Maybe try signing in?</h4>
+        <Button
+          btnType="Success"
+          clicked={() => {
+            setShowModal(false);
+            setIsSignup(false);
+          }}
+        >
+          YES
+        </Button>
+        <Button
+          btnType="Danger"
+          clicked={() => {
+            setShowModal(false);
+            setIsSignup(true);
+          }}
+        >
+          NO
+        </Button>
+      </Modal>
       <form onSubmit={submitHandler}>
         {form}
         <Button btnType="Success">SUBMIT</Button>

@@ -11,7 +11,6 @@ const modal = (props) => {
   //     nextProps.children !== props.children
   //   );
   // }
-
   return (
     <Auxy>
       <Backdrop show={props.show} clicked={props.modalClosed} />
