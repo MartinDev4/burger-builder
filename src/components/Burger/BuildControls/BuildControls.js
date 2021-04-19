@@ -5,10 +5,10 @@ import BuildControl from "./BuildControl/BuildControl";
 import { useSelector } from "react-redux";
 
 const controls = [
-  { label: "salad", type: "salad" },
-  { label: "bacon", type: "bacon" },
-  { label: "cheese", type: "cheese" },
-  { label: "meat", type: "meat" },
+  { label: "Salad", type: "salad" },
+  { label: "Bacon", type: "bacon" },
+  { label: "Cheese", type: "cheese" },
+  { label: "Meat", type: "meat" },
 ];
 
 const buildControls = (props) => {
