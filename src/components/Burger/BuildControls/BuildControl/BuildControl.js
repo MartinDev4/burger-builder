@@ -4,7 +4,9 @@ import classes from "./BuildControl.css";
 
 const buildControl = (props) => (
   <div className={classes.BuildControl}>
-    <div className={classes.Label}>{props.label}</div>
+    <div className={classes.Label} style={{ textTransform: "capitalize" }}>
+      {props.label}: {props.amount}
+    </div>
     <button
       className={classes.Less}
       onClick={props.removed}
