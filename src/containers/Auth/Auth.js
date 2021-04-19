@@ -99,9 +99,8 @@ const auth = (props) => {
   if (props.loading) {
     form = <Spinner />;
   }
-
   useEffect(() => {
-    if (props.error) {
+    if (props.error && props.error.message === "EMAIL_EXISTS") {
       setShowModal(true);
     }
     return () => {};
