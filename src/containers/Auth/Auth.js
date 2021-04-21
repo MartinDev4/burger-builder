@@ -9,6 +9,7 @@ import Modal from "../../components/UI/Modal/Modal";
 import classes from "./Auth.css";
 import * as actions from "../../store/actions/index";
 import { updateObject, checkValidity } from "../../shared/utility";
+import { authFirebase } from "../../firebase";
 
 const auth = (props) => {
   const [authForm, setAuthForm] = useState({
@@ -42,7 +43,9 @@ const auth = (props) => {
     },
   });
   const [isSignup, setIsSignup] = useState(true);
-  const [showModal, setShowModal] = useState(false);
+  const [showEmailExistsModal, setShowEmailExistsModal] = useState(false);
+  const [showForgotPasswordModal, setShowForgotPasswordModal] = useState(false);
+  const [emailForPasswordReset, setEmailForPasswordReset] = useState("");
 
   const { buildingBurger, authRedirectPath, onSetAuthRedirectPath } = props;
 
@@ -65,6 +68,7 @@ const auth = (props) => {
     });
     setAuthForm(updatedControls);
   };
+  const passwordReset = (email) => authFirebase.sendPasswordResetEmail(email);
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -101,7 +105,7 @@ const auth = (props) => {
   }
   useEffect(() => {
     if (props.error && props.error.message === "EMAIL_EXISTS") {
-      setShowModal(true);
+      setShowEmailExistsModal(true);
     }
     return () => {};
   }, [props.error]);
@@ -121,13 +125,16 @@ const auth = (props) => {
     <div className={classes.Auth}>
       {authRedirect}
       {errorMessage}
-      <Modal show={showModal} modalClosed={() => setShowModal(false)}>
+      <Modal
+        show={showEmailExistsModal}
+        modalClosed={() => setShowEmailExistsModal(false)}
+      >
         <h4>Email already exists!</h4>
         <h4>Maybe try signing in?</h4>
         <Button
           btnType="Success"
           clicked={() => {
-            setShowModal(false);
+            setShowEmailExistsModal(false);
             setIsSignup(false);
           }}
         >
@@ -136,7 +143,7 @@ const auth = (props) => {
         <Button
           btnType="Danger"
           clicked={() => {
-            setShowModal(false);
+            setShowEmailExistsModal(false);
             setIsSignup(true);
           }}
         >
@@ -149,6 +156,30 @@ const auth = (props) => {
       </form>
       <Button clicked={switchAuthModeHandler} btnType="Danger">
         SWITCH TO {isSignup ? "SIGNIN" : "SIGNUP"}
+      </Button>
+      <Modal
+        show={showForgotPasswordModal}
+        modalClosed={() => setShowForgotPasswordModal(false)}
+      >
+        <Input
+          type="input"
+          changed={(event) => setEmailForPasswordReset(event.target.value)}
+        ></Input>
+        <Button
+          stl={{ color: "#2c93bf" }}
+          clicked={() => {
+            passwordReset(emailForPasswordReset);
+            setShowForgotPasswordModal(false);
+          }}
+        >
+          Send
+        </Button>
+      </Modal>
+      <Button
+        stl={{ width: "100%" }}
+        clicked={() => setShowForgotPasswordModal(true)}
+      >
+        Forgot password?
       </Button>
     </div>
   );
