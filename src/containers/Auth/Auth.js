@@ -174,6 +174,14 @@ const auth = (props) => {
         >
           Send
         </Button>
+        <Button
+          stl={{ color: "#bd1515" }}
+          clicked={() => {
+            setShowForgotPasswordModal(false);
+          }}
+        >
+          Close
+        </Button>
       </Modal>
       <Button
         stl={{ width: "100%" }}
