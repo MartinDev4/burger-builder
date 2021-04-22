@@ -46,6 +46,7 @@ const auth = (props) => {
   const [showEmailExistsModal, setShowEmailExistsModal] = useState(false);
   const [showForgotPasswordModal, setShowForgotPasswordModal] = useState(false);
   const [emailForPasswordReset, setEmailForPasswordReset] = useState("");
+  const [isInputPassResetTouched, setIsInputPassResetTouched] = useState(false);
 
   const { buildingBurger, authRedirectPath, onSetAuthRedirectPath } = props;
 
@@ -125,12 +126,15 @@ const auth = (props) => {
     <div className={classes.Auth}>
       {authRedirect}
       {errorMessage}
+      <h3 style={{ color: "#0030ab" }}>
+        Enter required details to {isSignup ? "Register" : "Log in"}
+      </h3>
       <Modal
         show={showEmailExistsModal}
         modalClosed={() => setShowEmailExistsModal(false)}
       >
         <h4>Email already exists!</h4>
-        <h4>Maybe try signing in?</h4>
+        <h4>Maybe try loging in?</h4>
         <Button
           btnType="Success"
           clicked={() => {
@@ -155,21 +159,34 @@ const auth = (props) => {
         <Button btnType="Success">SUBMIT</Button>
       </form>
       <Button clicked={switchAuthModeHandler} btnType="Danger">
-        SWITCH TO {isSignup ? "SIGNIN" : "SIGNUP"}
+        {isSignup ? "LOG IN" : "REGISTER"}
       </Button>
       <Modal
         show={showForgotPasswordModal}
         modalClosed={() => setShowForgotPasswordModal(false)}
       >
+        <h4>Enter your e-mail adress</h4>
         <Input
-          type="input"
-          changed={(event) => setEmailForPasswordReset(event.target.value)}
+          elementType="input"
+          changed={(event) => {
+            setIsInputPassResetTouched(true);
+            setEmailForPasswordReset(event.target.value);
+          }}
+          value={emailForPasswordReset}
+          invalid={
+            !checkValidity(emailForPasswordReset, {
+              isEmail: true,
+            })
+          }
+          shouldValidate={true}
+          touched={isInputPassResetTouched}
         ></Input>
         <Button
           stl={{ color: "#2c93bf" }}
           clicked={() => {
             passwordReset(emailForPasswordReset);
             setShowForgotPasswordModal(false);
+            setEmailForPasswordReset("");
           }}
         >
           Send
@@ -178,13 +195,15 @@ const auth = (props) => {
           stl={{ color: "#bd1515" }}
           clicked={() => {
             setShowForgotPasswordModal(false);
+            setIsInputPassResetTouched(false);
+            setEmailForPasswordReset("");
           }}
         >
           Close
         </Button>
       </Modal>
       <Button
-        stl={{ width: "100%" }}
+        stl={{ width: "100%", margin: "auto" }}
         clicked={() => setShowForgotPasswordModal(true)}
       >
         Forgot password?
