@@ -179,61 +179,53 @@ const auth = (props) => {
         modalClosed={() => {
           setShowForgotPasswordModal(false);
           setIsEmailSent(false);
+          setIsInputPassResetTouched(false);
+          setEmailForPasswordReset("");
         }}
       >
-        {isEmailSent ? (
-          <div>
+        <div>
+          <h4>Enter your e-mail adress</h4>
+          <Input
+            elementType="input"
+            changed={(event) => {
+              setIsInputPassResetTouched(true);
+              setEmailForPasswordReset(event.target.value);
+            }}
+            value={emailForPasswordReset}
+            invalid={!ifValid()}
+            shouldValidate={true}
+            touched={isInputPassResetTouched}
+          ></Input>
+          {isEmailSent ? (
             <p style={{ color: "#4124bf" }}>
               If you entered your e-mail correctly check your inbox!
             </p>
-            <Button
-              btnType="Danger"
-              clicked={() => {
-                setShowForgotPasswordModal(false);
-                setIsEmailSent(false);
-                setIsInputPassResetTouched(false);
-              }}
-            >
-              Close
-            </Button>
-          </div>
-        ) : (
-          <div>
-            <h4>Enter your e-mail adress</h4>
-            <Input
-              elementType="input"
-              changed={(event) => {
-                setIsInputPassResetTouched(true);
-                setEmailForPasswordReset(event.target.value);
-              }}
-              value={emailForPasswordReset}
-              invalid={!ifValid()}
-              shouldValidate={true}
-              touched={isInputPassResetTouched}
-            ></Input>
-            <Button
-              stl={ifValid() ? { color: "#2c93bf" } : { color: "#ccc" }}
-              clicked={() => {
-                passwordReset(emailForPasswordReset);
-                setIsEmailSent(true);
-                setEmailForPasswordReset("");
-              }}
-              disabled={!ifValid()}
-            >
-              Send
-            </Button>
-            <Button
-              stl={{ color: "#bd1515" }}
-              clicked={() => {
-                setShowForgotPasswordModal(false);
-                setIsInputPassResetTouched(false);
-                setEmailForPasswordReset("");
-              }}
-            >
-              Close
-            </Button>
-          </div>
-        )}
+          ) : null}
+          <Button
+            stl={ifValid() ? { color: "#2c93bf" } : { color: "#ccc" }}
+            clicked={() => {
+              passwordReset(emailForPasswordReset);
+              setIsEmailSent(true);
+              setEmailForPasswordReset("");
+              setIsInputPassResetTouched(false);
+            }}
+            disabled={!ifValid()}
+          >
+            Send
+          </Button>
+          <Button
+            stl={{ color: "#bd1515" }}
+            clicked={() => {
+              setShowForgotPasswordModal(false);
+              setIsInputPassResetTouched(false);
+              setEmailForPasswordReset("");
+              setIsEmailSent(false);
+              setIsInputPassResetTouched(false);
+            }}
+          >
+            Close
+          </Button>
+        </div>
       </Modal>
       <Button
         stl={{ width: "100%", margin: "auto" }}
