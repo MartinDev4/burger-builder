@@ -47,6 +47,7 @@ const auth = (props) => {
   const [showForgotPasswordModal, setShowForgotPasswordModal] = useState(false);
   const [emailForPasswordReset, setEmailForPasswordReset] = useState("");
   const [isInputPassResetTouched, setIsInputPassResetTouched] = useState(false);
+  const [isEmailSent, setIsEmailSent] = useState(false);
 
   const { buildingBurger, authRedirectPath, onSetAuthRedirectPath } = props;
 
@@ -100,6 +101,14 @@ const auth = (props) => {
       changed={(event) => inputChangedHandler(event, formElement.id)}
     />
   ));
+
+  const closeEmailSentMessage = (ms) => {
+    setTimeout(() => {
+      setIsEmailSent(false);
+      setIsInputPassResetTouched(false);
+      setShowForgotPasswordModal(false);
+    }, ms);
+  };
 
   if (props.loading) {
     form = <Spinner />;
@@ -163,44 +172,56 @@ const auth = (props) => {
       </Button>
       <Modal
         show={showForgotPasswordModal}
-        modalClosed={() => setShowForgotPasswordModal(false)}
+        modalClosed={() => {
+          setShowForgotPasswordModal(false);
+          setIsEmailSent(false);
+        }}
       >
-        <h4>Enter your e-mail adress</h4>
-        <Input
-          elementType="input"
-          changed={(event) => {
-            setIsInputPassResetTouched(true);
-            setEmailForPasswordReset(event.target.value);
-          }}
-          value={emailForPasswordReset}
-          invalid={
-            !checkValidity(emailForPasswordReset, {
-              isEmail: true,
-            })
-          }
-          shouldValidate={true}
-          touched={isInputPassResetTouched}
-        ></Input>
-        <Button
-          stl={{ color: "#2c93bf" }}
-          clicked={() => {
-            passwordReset(emailForPasswordReset);
-            setShowForgotPasswordModal(false);
-            setEmailForPasswordReset("");
-          }}
-        >
-          Send
-        </Button>
-        <Button
-          stl={{ color: "#bd1515" }}
-          clicked={() => {
-            setShowForgotPasswordModal(false);
-            setIsInputPassResetTouched(false);
-            setEmailForPasswordReset("");
-          }}
-        >
-          Close
-        </Button>
+        {isEmailSent ? (
+          <p style={{ color: "#4124bf" }}>
+            If you entered your e-mail correctly check your inbox!
+          </p>
+        ) : (
+          <div>
+            <h4>Enter your e-mail adress</h4>
+            <Input
+              elementType="input"
+              changed={(event) => {
+                setIsInputPassResetTouched(true);
+                setEmailForPasswordReset(event.target.value);
+              }}
+              value={emailForPasswordReset}
+              invalid={
+                !checkValidity(emailForPasswordReset, {
+                  isEmail: true,
+                })
+              }
+              shouldValidate={true}
+              touched={isInputPassResetTouched}
+            ></Input>
+            <Button
+              stl={{ color: "#2c93bf" }}
+              clicked={() => {
+                passwordReset(emailForPasswordReset);
+                setIsEmailSent(true);
+                setEmailForPasswordReset("");
+                closeEmailSentMessage(2500);
+              }}
+            >
+              Send
+            </Button>
+            <Button
+              stl={{ color: "#bd1515" }}
+              clicked={() => {
+                setShowForgotPasswordModal(false);
+                setIsInputPassResetTouched(false);
+                setEmailForPasswordReset("");
+              }}
+            >
+              Close
+            </Button>{" "}
+          </div>
+        )}
       </Modal>
       <Button
         stl={{ width: "100%", margin: "auto" }}
