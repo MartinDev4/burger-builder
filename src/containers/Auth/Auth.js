@@ -81,6 +81,12 @@ const auth = (props) => {
     setIsSignup(!isSignup);
   };
 
+  const ifValid = () => {
+    return checkValidity(emailForPasswordReset, {
+      isEmail: true,
+    });
+  };
+
   const formElementsArray = [];
   for (let key in authForm) {
     formElementsArray.push({
@@ -101,14 +107,6 @@ const auth = (props) => {
       changed={(event) => inputChangedHandler(event, formElement.id)}
     />
   ));
-
-  const closeEmailSentMessage = (ms) => {
-    setTimeout(() => {
-      setIsEmailSent(false);
-      setIsInputPassResetTouched(false);
-      setShowForgotPasswordModal(false);
-    }, ms);
-  };
 
   if (props.loading) {
     form = <Spinner />;
@@ -165,9 +163,15 @@ const auth = (props) => {
       </Modal>
       <form onSubmit={submitHandler}>
         {form}
-        <Button btnType="Success">SUBMIT</Button>
+        <Button btnType="Success" stl={{ margin: "auto" }}>
+          SUBMIT
+        </Button>
       </form>
-      <Button clicked={switchAuthModeHandler} btnType="Danger">
+      <Button
+        clicked={switchAuthModeHandler}
+        btnType="Danger"
+        stl={{ margin: "auto" }}
+      >
         {isSignup ? "LOG IN" : "REGISTER"}
       </Button>
       <Modal
@@ -178,9 +182,21 @@ const auth = (props) => {
         }}
       >
         {isEmailSent ? (
-          <p style={{ color: "#4124bf" }}>
-            If you entered your e-mail correctly check your inbox!
-          </p>
+          <div>
+            <p style={{ color: "#4124bf" }}>
+              If you entered your e-mail correctly check your inbox!
+            </p>
+            <Button
+              btnType="Danger"
+              clicked={() => {
+                setShowForgotPasswordModal(false);
+                setIsEmailSent(false);
+                setIsInputPassResetTouched(false);
+              }}
+            >
+              Close
+            </Button>
+          </div>
         ) : (
           <div>
             <h4>Enter your e-mail adress</h4>
@@ -191,22 +207,18 @@ const auth = (props) => {
                 setEmailForPasswordReset(event.target.value);
               }}
               value={emailForPasswordReset}
-              invalid={
-                !checkValidity(emailForPasswordReset, {
-                  isEmail: true,
-                })
-              }
+              invalid={!ifValid()}
               shouldValidate={true}
               touched={isInputPassResetTouched}
             ></Input>
             <Button
-              stl={{ color: "#2c93bf" }}
+              stl={ifValid() ? { color: "#2c93bf" } : { color: "#ccc" }}
               clicked={() => {
                 passwordReset(emailForPasswordReset);
                 setIsEmailSent(true);
                 setEmailForPasswordReset("");
-                closeEmailSentMessage(2500);
               }}
+              disabled={!ifValid()}
             >
               Send
             </Button>
@@ -219,7 +231,7 @@ const auth = (props) => {
               }}
             >
               Close
-            </Button>{" "}
+            </Button>
           </div>
         )}
       </Modal>
