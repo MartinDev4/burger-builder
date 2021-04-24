@@ -6,6 +6,7 @@ import axios from "../../axios-orders";
 import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 import * as actions from "../../store/actions/index";
 import Spinner from "../../components/UI/Spinner/Spinner";
+import DarkThemeButton from "../../components/UI/DarkThemeButton/DarkThemeButton";
 
 const orders = (props) => {
   const { onFetchOrders } = props;
@@ -24,7 +25,18 @@ const orders = (props) => {
       />
     ));
   }
-  return <div>{orders}</div>;
+  return (
+    <div
+      style={
+        props.darkTheme
+          ? { backgroundColor: "#393b39" }
+          : { backgroundColor: "#fff" }
+      }
+    >
+      <DarkThemeButton />
+      {orders}
+    </div>
+  );
 };
 
 const mapStateToProps = (state) => {
@@ -33,6 +45,7 @@ const mapStateToProps = (state) => {
     loading: state.order.loading,
     token: state.auth.token,
     userId: state.auth.userId,
+    darkTheme: state.burgerBuilder.darkTheme,
   };
 };
 

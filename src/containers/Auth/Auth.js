@@ -5,6 +5,7 @@ import { Redirect } from "react-router-dom";
 import Input from "../../components/UI/Input/Input";
 import Button from "../../components/UI/Button/Button";
 import Spinner from "../../components/UI/Spinner/Spinner";
+import DarkThemeButton from "../../components/UI/DarkThemeButton/DarkThemeButton";
 import Modal from "../../components/UI/Modal/Modal";
 import classes from "./Auth.css";
 import * as actions from "../../store/actions/index";
@@ -131,6 +132,7 @@ const auth = (props) => {
 
   return (
     <div className={classes.Auth}>
+      <DarkThemeButton />
       {authRedirect}
       {errorMessage}
       <h3 style={{ color: "#0030ab" }}>
@@ -244,6 +246,7 @@ const mapStateToProps = (state) => {
     isAuthenticated: state.auth.token !== null,
     buildingBurger: state.burgerBuilder.building,
     authRedirectPath: state.auth.authRedirectPath,
+    darkTheme: state.burgerBuilder.darkTheme,
   };
 };
 

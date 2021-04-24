@@ -7,6 +7,7 @@ import BuildControls from "../../components/Burger/BuildControls/BuildControls";
 import Modal from "../../components/UI/Modal/Modal";
 import OrderSummary from "../../components/Burger/OrderSummary/OrderSummary";
 import Spinner from "../../components/UI/Spinner/Spinner";
+import DarkThemeButton from "../../components/UI/DarkThemeButton/DarkThemeButton";
 import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 import * as actions from "../../store/actions/index";
 import axios from "../../axios-orders";
@@ -18,6 +19,7 @@ const burgerBuilder = (props) => {
   const ings = useSelector((state) => state.burgerBuilder.ingredients);
   const price = useSelector((state) => state.burgerBuilder.totalPrice);
   const error = useSelector((state) => state.burgerBuilder.error);
+  const darkTheme = useSelector((state) => state.burgerBuilder.darkTheme);
   const isAuthenticated = useSelector((state) => state.auth.token !== null);
   const onIngredientAdded = (ingName) =>
     dispatch(actions.addIngredient(ingName));
@@ -99,12 +101,19 @@ const burgerBuilder = (props) => {
   }
   // {salad: true, meat: false, ...}
   return (
-    <Auxy>
-      <Modal show={purchasing} modalClosed={purchaseCancelHandler}>
-        {orderSummary}
-      </Modal>
-      {burger}
-    </Auxy>
+    <div
+      style={
+        darkTheme ? { backgroundColor: "#393b39" } : { backgroundColor: "#fff" }
+      }
+    >
+      <Auxy>
+        <Modal show={purchasing} modalClosed={purchaseCancelHandler}>
+          {orderSummary}
+        </Modal>
+        <DarkThemeButton />
+        {burger}
+      </Auxy>
+    </div>
   );
 };
 

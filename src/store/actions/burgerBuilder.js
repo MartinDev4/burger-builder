@@ -28,6 +28,13 @@ export const fetchIngredientsFailed = () => {
   };
 };
 
+export const switchTheme = (value) => {
+  return {
+    type: actionTypes.SWITCH_THEME,
+    value: value,
+  };
+};
+
 export const initIngredients = () => {
   return (dispatch) => {
     axios

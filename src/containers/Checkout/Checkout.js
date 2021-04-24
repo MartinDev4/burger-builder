@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 
 import CheckoutSummary from "../../components/Order/CheckoutSummary/CheckoutSummary";
 import ContactData from "./ContactData/ContactData";
+import DarkThemeButton from "../../components/UI/DarkThemeButton/DarkThemeButton";
 
 const checkout = (props) => {
   const checkoutCancelledHandler = () => {
@@ -18,7 +19,14 @@ const checkout = (props) => {
   if (props.ings) {
     const purchasedRedirect = props.purchased ? <Redirect to="/" /> : null;
     summary = (
-      <div>
+      <div
+        style={
+          props.darkTheme
+            ? { backgroundColor: "#393b39" }
+            : { backgroundColor: "#fff" }
+        }
+      >
+        <DarkThemeButton />
         {purchasedRedirect}
         <CheckoutSummary
           ingredients={props.ings}
@@ -39,6 +47,7 @@ const mapStateToProps = (state) => {
   return {
     ings: state.burgerBuilder.ingredients,
     purchased: state.order.purchased,
+    darkTheme: state.burgerBuilder.darkTheme,
   };
 };
 

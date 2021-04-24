@@ -6,6 +6,7 @@ const initialState = {
   totalPrice: 2,
   error: false,
   building: false,
+  darkTheme: false,
 };
 
 const INGREDIENT_PRICES = {
@@ -13,6 +14,10 @@ const INGREDIENT_PRICES = {
   cheese: 0.5,
   meat: 1.5,
   bacon: 0.7,
+};
+
+const switchTheme = (state, action) => {
+  return updateObject(state, { darkTheme: action.value });
 };
 
 const addIngredient = (state, action) => {
@@ -69,6 +74,8 @@ const reducer = (state = initialState, action) => {
       return setIngredients(state, action);
     case actionTypes.FETCH_INGREDIENTS_FAILED:
       return fetchIngredientsFailed(state, action);
+    case actionTypes.SWITCH_THEME:
+      return switchTheme(state, action);
     default:
       return state;
   }

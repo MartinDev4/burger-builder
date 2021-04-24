@@ -164,7 +164,14 @@ const contactData = (props) => {
     form = <Spinner />;
   }
   return (
-    <div className={classes.ContactData}>
+    <div
+      className={classes.ContactData}
+      style={
+        props.darkTheme
+          ? { backgroundColor: "#393b39" }
+          : { backgroundColor: "#fff" }
+      }
+    >
       <h4>Enter your Contact Data</h4>
       {form}
     </div>
@@ -178,6 +185,7 @@ const mapStateToProps = (state) => {
     loading: state.order.loading,
     token: state.auth.token,
     userId: state.auth.userId,
+    darkTheme: state.burgerBuilder.darkTheme,
   };
 };
 
