@@ -1,12 +1,14 @@
 import * as actionTypes from "../actions/actionTypes";
 import { updateObject } from "../../shared/utility";
 
+const localDarkTheme = JSON.parse(localStorage.getItem("darkTheme"));
+
 const initialState = {
   ingredients: null,
   totalPrice: 2,
   error: false,
   building: false,
-  darkTheme: false,
+  darkTheme: localDarkTheme,
 };
 
 const INGREDIENT_PRICES = {

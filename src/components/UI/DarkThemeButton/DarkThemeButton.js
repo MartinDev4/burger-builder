@@ -5,6 +5,7 @@ import * as actions from "../../../store/actions/index";
 
 const darkTheme = (props) => {
   const [darkThemeState, setDarkThemeState] = useState(props.darkTheme);
+  localStorage.setItem("darkTheme", darkThemeState);
 
   useEffect(() => {
     props.onSwitchTheme(darkThemeState);
