@@ -48,7 +48,13 @@ const app = (props) => {
   }
 
   return (
-    <div>
+    <div
+      style={
+        props.darkTheme
+          ? { backgroundColor: "#393b39", width: "99vw", height: "100vh" }
+          : { backgroundColor: "#fff" }
+      }
+    >
       <Layout>
         <Suspense fallback={<p>Loading ...</p>}>{routes}</Suspense>
       </Layout>
@@ -59,6 +65,7 @@ const app = (props) => {
 const mapStateToProps = (state) => {
   return {
     isAuthenticated: state.auth.token !== null,
+    darkTheme: state.burgerBuilder.darkTheme,
   };
 };
 
