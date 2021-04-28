@@ -51,7 +51,7 @@ const app = (props) => {
     <div
       style={
         props.darkTheme
-          ? { backgroundColor: "#393b39", width: "99vw", height: "100vh" }
+          ? { backgroundColor: "#393b39", width: "98.9vw", height: "100vh" }
           : { backgroundColor: "#fff" }
       }
     >
