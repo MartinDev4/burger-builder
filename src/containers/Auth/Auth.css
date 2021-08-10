@@ -5,14 +5,7 @@
   border: 1px solid #eee;
   padding: 10px;
   box-sizing: border-box;
-  background-image: linear-gradient(
-    to right bottom,
-    #1659ad,
-    #475fb6,
-    #6866be,
-    #846cc5,
-    #9e72cb
-  );
+  background-image: linear-gradient(to right bottom, #4cd137, #44bd32);
   box-shadow: rgba(60, 157, 236, 0.35) 0px 5px 15px;
 }
 

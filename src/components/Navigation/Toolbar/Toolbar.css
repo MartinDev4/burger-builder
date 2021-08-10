@@ -5,12 +5,7 @@
   top: 0;
   left: 0;
   background: rgb(221, 190, 110);
-  background: linear-gradient(
-    90deg,
-    rgba(221, 190, 110, 1) 6%,
-    rgba(157, 117, 16, 1) 37%,
-    rgba(214, 141, 37, 1) 92%
-  );
+  background: linear-gradient(90deg, #0097e6, #8c7ae6, #9c88ff);
   display: flex;
   justify-content: space-between;
   align-items: center;
