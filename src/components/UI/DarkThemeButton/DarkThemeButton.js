@@ -13,10 +13,9 @@ const darkTheme = (props) => {
 
   return (
     <div className={classes.Container} style={props.stl}>
-      <label htmlFor="theme">Enable Dark Theme</label>
+      <p>Enable Dark Theme</p>
       <input
         type="checkbox"
-        id="theme"
         checked={darkThemeState}
         className={classes.Check}
         onChange={() => setDarkThemeState((prevState) => !prevState)}
