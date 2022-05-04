@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { connect } from "react-redux";
 import classes from "./DarkThemeButton.css";
 import * as actions from "../../../store/actions/index";
 
 const darkTheme = (props) => {
-  const [darkThemeState, setDarkThemeState] = useState(props.darkTheme);
-  localStorage.setItem("darkTheme", darkThemeState);
+  const isDarkTheme = useSelector((state) => state.burgerBuilder.darkTheme);
+  const [darkThemeState, setDarkThemeState] = useState(isDarkTheme);
 
   useEffect(() => {
     props.onSwitchTheme(darkThemeState);
+    localStorage.setItem("darkTheme", darkThemeState);
   }, [darkThemeState]);
 
   return (
@@ -16,18 +18,12 @@ const darkTheme = (props) => {
       <p>Enable Dark Theme</p>
       <input
         type="checkbox"
-        checked={darkThemeState}
+        checked={isDarkTheme}
         className={classes.Check}
         onChange={() => setDarkThemeState((prevState) => !prevState)}
       />
     </div>
   );
-};
-
-const mapStateToProps = (state) => {
-  return {
-    darkTheme: state.burgerBuilder.darkTheme,
-  };
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -36,4 +32,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(darkTheme);
+export default connect(null, mapDispatchToProps)(darkTheme);

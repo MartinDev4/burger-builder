@@ -3,17 +3,9 @@
   width: 80%;
   text-align: center;
   box-shadow: 0 2px 3px #ccc;
-  border: 1px solid #eee;
   padding: 10px;
   box-sizing: border-box;
-  background-image: linear-gradient(
-    to left bottom,
-    #18dcff,
-    #16d5fa,
-    #15cef5,
-    #15c7f0,
-    #17c0eb
-  );
+  background-image: linear-gradient(0deg, #4896c7, #3d799e, #3a7192);
 }
 
 @media (min-width: 600px) {

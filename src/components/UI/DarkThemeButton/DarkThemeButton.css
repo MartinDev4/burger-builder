@@ -1,11 +1,20 @@
 .Container {
   position: absolute;
+  display: block;
   left: 85%;
   margin-top: 1%;
   display: flex;
   align-items: center;
   flex-direction: row;
   justify-content: start;
+  flex-shrink: initial;
+}
+
+@media (max-width: 700px) {
+  .Container {
+    position: static;
+    margin-left: 2%;
+  }
 }
 
 .Check {

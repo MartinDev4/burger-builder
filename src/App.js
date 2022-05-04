@@ -6,6 +6,7 @@ import Layout from "./hoc/Layout/Layout";
 import BurgerBuilder from "./containers/BurgerBuilder/BurgerBuilder";
 import Logout from "./containers/Auth/Logout/Logout";
 import * as actions from "./store/actions/index";
+import theme from "./index.css";
 
 const Checkout = React.lazy(() => {
   return import("./containers/Checkout/Checkout");
@@ -48,13 +49,7 @@ const app = (props) => {
   }
 
   return (
-    <div
-      style={
-        props.darkTheme
-          ? { backgroundColor: "#393b39", width: "98.9vw", height: "100vh" }
-          : { backgroundColor: "#fff" }
-      }
-    >
+    <div className={props.darkTheme ? theme.darkTheme : theme.lightTheme}>
       <Layout>
         <Suspense fallback={<p>Loading ...</p>}>{routes}</Suspense>
       </Layout>

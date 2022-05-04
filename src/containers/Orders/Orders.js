@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
+import theme from "../../index.css";
+
 import Order from "../../components/Order/Order";
 import axios from "../../axios-orders";
 import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
@@ -26,13 +28,7 @@ const orders = (props) => {
     ));
   }
   return (
-    <div
-      style={
-        props.darkTheme
-          ? { backgroundColor: "#393b39", width: "98.9vw", height: "100vh" }
-          : { backgroundColor: "#fff" }
-      }
-    >
+    <div className={props.darkTheme ? theme.darkTheme : theme.lightTheme}>
       <DarkThemeButton />
       {orders}
     </div>

@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import classes from "../../index.css";
+
 import Auxy from "../../hoc/Auxy/Auxy";
 import Burger from "../../components/Burger/Burger";
 import BuildControls from "../../components/Burger/BuildControls/BuildControls";
@@ -101,11 +103,7 @@ const burgerBuilder = (props) => {
   }
   // {salad: true, meat: false, ...}
   return (
-    <div
-      style={
-        darkTheme ? { backgroundColor: "#393b39" } : { backgroundColor: "#fff" }
-      }
-    >
+    <div className={darkTheme ? classes.darkTheme : classes.lightTheme}>
       <Auxy>
         <Modal show={purchasing} modalClosed={purchaseCancelHandler}>
           {orderSummary}
