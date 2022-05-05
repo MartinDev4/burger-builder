@@ -16,6 +16,8 @@ const INGREDIENT_PRICES = {
   cheese: 0.5,
   meat: 1.5,
   bacon: 0.7,
+  tomato: 0.3,
+  onion: 0.2,
 };
 
 const switchTheme = (state, action) => {
@@ -52,6 +54,8 @@ const setIngredients = (state, action) => {
   return updateObject(state, {
     ingredients: {
       salad: action.ingredients.salad,
+      onion: action.ingredients.onion,
+      tomato: action.ingredients.tomato,
       bacon: action.ingredients.bacon,
       cheese: action.ingredients.cheese,
       meat: action.ingredients.meat,

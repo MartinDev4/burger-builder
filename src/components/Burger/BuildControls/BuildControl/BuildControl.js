@@ -16,6 +16,9 @@ const buildControl = (props) => (
     <button className={classes.More} onClick={props.added}>
       +
     </button>
+    <p>
+      Price: <span style={{ color: "#036704" }}>{props.price}$</span>
+    </p>
   </div>
 );
 
