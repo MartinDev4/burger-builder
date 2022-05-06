@@ -108,6 +108,7 @@ const contactData = (props) => {
       price: props.price,
       orderData: formData,
       userId: props.userId,
+      status: false,
     };
 
     props.onOrderBurger(order, props.token);

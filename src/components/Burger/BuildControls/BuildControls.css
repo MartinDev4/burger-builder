@@ -1,5 +1,5 @@
 .BuildControls {
-  width: 100%;
+  width: 35%;
   background: rgb(32, 135, 136);
   background: linear-gradient(270deg, #4896c7, #32688a);
   display: flex;
@@ -8,6 +8,7 @@
   box-shadow: 0 2px 1px #ccc;
   margin: auto;
   padding: 10px 0;
+  margin-top: 2.5%;
 }
 
 .OrderButton {
@@ -49,5 +50,12 @@
   }
   100% {
     transform: scale(1);
+  }
+}
+
+@media (max-width: 1200px) {
+  .BuildControls {
+    width: 100%;
+    margin-top: 0;
   }
 }

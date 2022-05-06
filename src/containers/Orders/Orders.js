@@ -24,6 +24,7 @@ const orders = (props) => {
         key={order.id}
         ingredients={order.ingredients}
         price={order.price}
+        status={order.status}
       />
     ));
   }

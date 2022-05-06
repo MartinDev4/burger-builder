@@ -21,10 +21,27 @@ const order = (props) => {
   });
 
   return (
-    <div className={classes.Order}>
+    <div
+      className={classes.Order}
+      style={
+        props.status
+          ? { border: "2px solid limegreen" }
+          : { border: "2px solid red" }
+      }
+    >
       <p>Ingredients: {ingredientOutput}</p>
       <p>
         Price: <strong>USD {Number.parseFloat(props.price).toFixed(2)}</strong>
+      </p>
+      <p>
+        Status:{" "}
+        <i>
+          <span
+            style={props.status ? { color: "limegreen" } : { color: "red" }}
+          >
+            {props.status ? "Ready" : "Not Ready"}
+          </span>
+        </i>
       </p>
     </div>
   );

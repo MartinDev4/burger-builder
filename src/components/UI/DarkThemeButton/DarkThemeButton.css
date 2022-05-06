@@ -13,6 +13,8 @@
 @media (max-width: 700px) {
   .Container {
     position: static;
+    display: flex;
+    justify-content: center;
     margin-left: 2%;
   }
 }
