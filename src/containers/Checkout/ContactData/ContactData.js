@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
 
 import Button from "../../../components/UI/Button/Button";
@@ -96,6 +96,12 @@ const contactData = (props) => {
   });
   const [formIsValid, setFormIsValid] = useState(false);
 
+  const scrollDown = useRef(null);
+
+  useEffect(() => {
+    scrollDown.current.scrollIntoView({ behavior: "smooth" });
+  }, []);
+
   const orderHandler = (event) => {
     event.preventDefault();
 
@@ -164,6 +170,7 @@ const contactData = (props) => {
   if (props.loading) {
     form = <Spinner />;
   }
+
   return (
     <div
       className={classes.ContactData}
@@ -175,6 +182,7 @@ const contactData = (props) => {
     >
       <h4>Enter your Contact Data</h4>
       {form}
+      <div ref={scrollDown} />
     </div>
   );
 };

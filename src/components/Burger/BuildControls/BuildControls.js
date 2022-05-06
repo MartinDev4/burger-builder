@@ -25,8 +25,6 @@ const controls = [
 const buildControls = (props) => {
   const ings = useSelector((state) => state.burgerBuilder.ingredients);
 
-  console.log(ings);
-
   return (
     <div className={classes.BuildControls}>
       <p>
